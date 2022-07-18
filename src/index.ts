@@ -100,6 +100,9 @@ async function run() {
 
       const hostname = target ? `${target}.web.app` : `${projectId}.web.app`;
       const url = `https://${hostname}/`;
+
+      setOutput("details_url", hostname);
+
       await finish({
         details_url: url,
         conclusion: "success",

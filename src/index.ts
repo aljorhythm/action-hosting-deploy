@@ -87,11 +87,12 @@ async function run() {
     endGroup();
 
     if (isProductionDeploy) {
-      startGroup("Deploying to production site");
-      const deployment = await deployProductionSite(gacFilename, {
+      const config = {
         projectId,
         target,
-      });
+      };
+      startGroup(`Deploying to production site target: ${config}`);
+      const deployment = await deployProductionSite(gacFilename, config);
       if (deployment.status === "error") {
         throw Error((deployment as ErrorResult).error);
       }

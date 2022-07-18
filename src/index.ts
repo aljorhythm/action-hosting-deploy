@@ -91,7 +91,9 @@ async function run() {
         projectId,
         target,
       };
-      startGroup(`Deploying to production site target: ${config}`);
+      startGroup(
+        `Deploying to production site target: ${JSON.stringify(config)}`
+      );
       const deployment = await deployProductionSite(gacFilename, config);
       if (deployment.status === "error") {
         throw Error((deployment as ErrorResult).error);
@@ -101,7 +103,6 @@ async function run() {
       const hostname = target ? `${target}.web.app` : `${projectId}.web.app`;
       const url = `https://${hostname}/`;
 
-      console.log("setting output: details_url", url);
       setOutput("details_url", url);
 
       await finish({
